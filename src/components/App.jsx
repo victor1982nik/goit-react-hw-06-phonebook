@@ -1,72 +1,25 @@
-import { nanoid } from 'nanoid';
-import { useState, useEffect } from 'react';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactsList/ContactsList';
 import { Filter } from './Filter/Filter';
 import { Section } from './Section/Section';
-const keyLocalStorage = 'contacts';
+//const keyLocalStorage = 'contacts';
+import { useSelector } from "react-redux";
 
-export function App() {
-  const [filter, setFilter] = useState('');
-  const [contacts, setContacts] = useState(()=>JSON.parse(localStorage.getItem(keyLocalStorage)) ?? []);
-
-  useEffect(() => {     
-    localStorage.setItem(keyLocalStorage, JSON.stringify(contacts));    
-  }, [contacts]);
-
-  const filterContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
-  };
-
-  const findContact = contactToFind => {
-    return contacts.find(contact => contact.name === contactToFind);
-  };
-
-  const handleDeleteItem = idToDelete => {    
-    setContacts(state => state.filter(contact => contact.id !== idToDelete));    
-  };
-
-  const handleSubmit = ({ name, mobile }) => {
-    if(!name || !mobile) {
-      window.alert(`Неправильный вводб поле не должно быть пустым`);
-      return;
-    }
-    const newEl = {
-      id: nanoid(),
-      name: name,
-      number: mobile,
-    };
-    if (findContact(name)) {
-      window.alert(`${name} is already in contacts`);
-      return;
-    } else {
-      setContacts(state => [newEl, ...state]);
-    }
-  };
-
-  const filteredContacts = filterContacts();
-
+export function App() { 
+  
+  const contacts = useSelector(state => state.contacts);
   return (
     <div>
       <Section title="PhoneBook">
-        <ContactForm onSubmit={handleSubmit} />
+        <ContactForm  />
       </Section>
 
       <Section title="Contacts">
         {contacts?.length > 0 && (
           <>
-            <Filter
-              filter={filter}
-              findInList={e => setFilter(e.target.value)}
-            />
+            <Filter  />
             <br />            
-              <ContactList
-                dataFiltered={filteredContacts}
-                onDelete={handleDeleteItem}
-              />            
+              <ContactList />            
           </>
         )}
       </Section>
@@ -169,3 +122,43 @@ export function App() {
 //   }
 // }
 //102 строки кода тспользуя класс
+//----------------------------------
+// const [contacts, setContacts] = useState(()=>JSON.parse(localStorage.getItem(keyLocalStorage)) ?? []);
+
+  // useEffect(() => {     
+  //   localStorage.setItem(keyLocalStorage, JSON.stringify(contacts));    
+  // }, [contacts]);
+
+  // const filterContacts = () => {
+  //   const normalizedFilter = filter.toLowerCase();
+  //   return contacts.filter(contact =>
+  //     contact.name.toLowerCase().includes(normalizedFilter)
+  //   );
+  // };
+
+  // const findContact = contactToFind => {
+  //   return contacts.find(contact => contact.name === contactToFind);
+  // };
+
+  // const handleDeleteItem = idToDelete => {    
+  //   setContacts(state => state.filter(contact => contact.id !== idToDelete));    
+  // };
+// const handleSubmit = ({ name, mobile }) => {
+  //   if(!name || !mobile) {
+  //     window.alert(`Неправильный вводa поле не должно быть пустым`);
+  //     return;
+  //   }
+  //   const newEl = {
+  //     id: nanoid(),
+  //     name: name,
+  //     number: mobile,
+  //   };
+  //   if (findContact(name)) {
+  //     window.alert(`${name} is already in contacts`);
+  //     return;
+  //   } else {
+  //     setContacts(state => [newEl, ...state]);
+  //   }
+  // };
+
+  //const filteredContacts = filterContacts();
