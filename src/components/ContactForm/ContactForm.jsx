@@ -11,8 +11,7 @@ export function ContactForm() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const {name, mobile} = e.target.elements;
-    //console.log(name.value, mobile.value);
+    const {name, mobile} = e.target.elements;    
     dispatch(addContact({name: name.value, tel: mobile.value}));
     
     setName('');

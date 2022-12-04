@@ -8,7 +8,7 @@ const contactsInitialState = [
     { id: 4, name: "Vladimir", tel: "093678547" },
   ];
 
-  const contactsSlice = createSlice({
+   const contactsSlice = createSlice({
     name: "contacts",
     initialState: contactsInitialState,
     reducers: {
@@ -33,6 +33,8 @@ const contactsInitialState = [
       },      
     },
   });
-  // Експортуємо генератори екшенів та редюсер
+  //const contactsReducer = contactsSlice.reducer;
+  //export const lsContactsReducer = persistReducer(persistConfig, contactsSlice.reducer);
+  
   export const { addContact, deleteContact } = contactsSlice.actions;
   export const contactsReducer = contactsSlice.reducer;

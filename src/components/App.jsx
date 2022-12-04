@@ -5,9 +5,11 @@ import { Section } from './Section/Section';
 //const keyLocalStorage = 'contacts';
 import { useSelector } from "react-redux";
 
+
 export function App() { 
   
   const contacts = useSelector(state => state.contacts);
+  //console.log(contacts);
   return (
     <div>
       <Section title="PhoneBook">
