@@ -28,10 +28,11 @@ const contactsInitialState = [
           };
         },
       },
-      deleteContact(state, action) {
-        return state.items.filter(task => task.id !== action.payload);
-        // const index = state.findIndex(task => task.id === action.payload);
-        // state.splice(index, 1);
+      deleteContact(state, action) {       
+        //return state.items.filter(item => item.id !== action.payload);
+        const index = state.items.findIndex(item => item.id === action.payload);
+        console.log(index);
+        state.items.splice(index, 1);
       },      
     },
   });
@@ -41,7 +42,7 @@ const contactsInitialState = [
   const persistConfig = {
    key: 'root',
    storage,  
-   whitelist: ['contacts'],
+   //whitelist: ['contacts'],
  }
 
 export const { addContact, deleteContact } = contactsSlice.actions;
