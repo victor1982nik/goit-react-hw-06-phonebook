@@ -3,25 +3,23 @@ import { ContactList } from './ContactsList/ContactsList';
 import { Filter } from './Filter/Filter';
 import { Section } from './Section/Section';
 //const keyLocalStorage = 'contacts';
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 
-
-export function App() { 
-  
-  const contacts = useSelector(state => state.contacts);
+export function App() {
+  const contacts = useSelector(state => state.contacts.items);
   //console.log(contacts);
   return (
     <div>
       <Section title="PhoneBook">
-        <ContactForm  />
+        <ContactForm />
       </Section>
 
       <Section title="Contacts">
         {contacts?.length > 0 && (
           <>
-            <Filter  />
-            <br />            
-              <ContactList />            
+            <Filter />
+            <br />
+            <ContactList />
           </>
         )}
       </Section>
@@ -127,40 +125,40 @@ export function App() {
 //----------------------------------
 // const [contacts, setContacts] = useState(()=>JSON.parse(localStorage.getItem(keyLocalStorage)) ?? []);
 
-  // useEffect(() => {     
-  //   localStorage.setItem(keyLocalStorage, JSON.stringify(contacts));    
-  // }, [contacts]);
+// useEffect(() => {
+//   localStorage.setItem(keyLocalStorage, JSON.stringify(contacts));
+// }, [contacts]);
 
-  // const filterContacts = () => {
-  //   const normalizedFilter = filter.toLowerCase();
-  //   return contacts.filter(contact =>
-  //     contact.name.toLowerCase().includes(normalizedFilter)
-  //   );
-  // };
+// const filterContacts = () => {
+//   const normalizedFilter = filter.toLowerCase();
+//   return contacts.filter(contact =>
+//     contact.name.toLowerCase().includes(normalizedFilter)
+//   );
+// };
 
-  // const findContact = contactToFind => {
-  //   return contacts.find(contact => contact.name === contactToFind);
-  // };
+// const findContact = contactToFind => {
+//   return contacts.find(contact => contact.name === contactToFind);
+// };
 
-  // const handleDeleteItem = idToDelete => {    
-  //   setContacts(state => state.filter(contact => contact.id !== idToDelete));    
-  // };
+// const handleDeleteItem = idToDelete => {
+//   setContacts(state => state.filter(contact => contact.id !== idToDelete));
+// };
 // const handleSubmit = ({ name, mobile }) => {
-  //   if(!name || !mobile) {
-  //     window.alert(`Неправильный вводa поле не должно быть пустым`);
-  //     return;
-  //   }
-  //   const newEl = {
-  //     id: nanoid(),
-  //     name: name,
-  //     number: mobile,
-  //   };
-  //   if (findContact(name)) {
-  //     window.alert(`${name} is already in contacts`);
-  //     return;
-  //   } else {
-  //     setContacts(state => [newEl, ...state]);
-  //   }
-  // };
+//   if(!name || !mobile) {
+//     window.alert(`Неправильный вводa поле не должно быть пустым`);
+//     return;
+//   }
+//   const newEl = {
+//     id: nanoid(),
+//     name: name,
+//     number: mobile,
+//   };
+//   if (findContact(name)) {
+//     window.alert(`${name} is already in contacts`);
+//     return;
+//   } else {
+//     setContacts(state => [newEl, ...state]);
+//   }
+// };
 
-  //const filteredContacts = filterContacts();
+//const filteredContacts = filterContacts();

@@ -12,11 +12,11 @@ const contactsInitialState = [
 
    const contactsSlice = createSlice({
     name: "contacts",
-    initialState: contactsInitialState,
+     initialState: {items: contactsInitialState },
     reducers: {
       addContact: {
         reducer(state, action) {
-          state.push(action.payload);
+          state.items.push(action.payload);
         },
         prepare({name, tel}) {
           return {
@@ -29,7 +29,7 @@ const contactsInitialState = [
         },
       },
       deleteContact(state, action) {
-        return state.filter(task => task.id !== action.payload);
+        return state.items.filter(task => task.id !== action.payload);
         // const index = state.findIndex(task => task.id === action.payload);
         // state.splice(index, 1);
       },      
@@ -41,9 +41,9 @@ const contactsInitialState = [
   const persistConfig = {
    key: 'root',
    storage,  
-   //whitelist: ['contacts'],
+   whitelist: ['contacts'],
  }
 
 export const { addContact, deleteContact } = contactsSlice.actions;
-export const contactsReducer = contactsSlice.reducer; 
-//export const lsContactsReducer = persistReducer(persistConfig, contactsSlice.reducer);
+//export const contactsReducer = contactsSlice.reducer; 
+export const lsContactsReducer = persistReducer(persistConfig, contactsSlice.reducer);
