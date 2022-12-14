@@ -36,8 +36,7 @@ const contactsInitialState = [
       },      
     },
   });
-  //const contactsReducer = contactsSlice.reducer;
-  
+    
   
   const persistConfig = {
    key: 'root',
@@ -46,5 +45,4 @@ const contactsInitialState = [
  }
 
 export const { addContact, deleteContact } = contactsSlice.actions;
-//export const contactsReducer = contactsSlice.reducer; 
 export const lsContactsReducer = persistReducer(persistConfig, contactsSlice.reducer);
